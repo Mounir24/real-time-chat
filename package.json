@@ -4,8 +4,7 @@
     "description": "Real Time chat with Node js & Socket.io",
     "main": "server.js",
     "scripts": {
-        "start": "node server.js",
-        "dev": "nodemon server.js"
+        "start": "node server.js"
     },
     "engines": {
         "node": "12.x"
