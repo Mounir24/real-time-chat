@@ -43,8 +43,7 @@
             const socket = io();
 
             // On form submit , Send message to server
-            $('form').submit((e) => {
-                e.preventDefault();
+            $('form').submit(() => {
                 socket.emit('chat', {
                     user: $('#user').val(),
                     message: $('#msg').val()
