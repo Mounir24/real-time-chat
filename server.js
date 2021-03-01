@@ -38,7 +38,7 @@ function encrypt(txt) {
 //console.log(hsh);
 //console.log(decrypt(hsh));
 // PORT
-const PORT = 9090;
+const PORT = process.env.PORT || 9090;
 
 // Middlewares
 app.use(express.static('public'));
