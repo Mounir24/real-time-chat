@@ -34,41 +34,44 @@
 
     <!--Loads the Socket library-->
     <script src="/socket.io/socket.io.js"></script>
-    <script>
-        //Initialize Socket.io
-        const socket = io();
-
-        // On form submit , Send message to server
-        $('form').submit((e) => {
-            e.preventDefault();
-            socket.emit('chat', {
-                user: $('#user').val(),
-                message: $('#msg').val()
-            });
-            $('#msg').val('');
-            $('#user').val('');
-            //alert('message has been sent successfuly')
-            return false;
-        });
-
-        // Broadcats message
-        $('#msg').on('keydown', () => {
-            socket.emit('typing', $('#user').val());
-        })
-
-        // When a message sent to server , append it to DOM
-        socket.on('chat', (payload) => {
-            $('#feedback').text('');
-            $('#messages').append($('<p>').text(payload.user + ': ' + payload.message));
-        })
-
-        // Broadcast message to the sockets
-        socket.on('typing', (payload) => {
-            $('#feedback').text(payload + ' typing...');
-        })
-    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
 
+    <script>
+        $(document).ready(function() {
+
+            //Initialize Socket.io
+            const socket = io();
+
+            // On form submit , Send message to server
+            $('form').submit((e) => {
+                e.preventDefault();
+                socket.emit('chat', {
+                    user: $('#user').val(),
+                    message: $('#msg').val()
+                });
+                $('#msg').val('');
+                $('#user').val('');
+                //alert('message has been sent successfuly')
+                return false;
+            });
+
+            // Broadcats message
+            $('#msg').on('keydown', () => {
+                socket.emit('typing', $('#user').val());
+            })
+
+            // When a message sent to server , append it to DOM
+            socket.on('chat', (payload) => {
+                $('#feedback').text('');
+                $('#messages').append($('<p>').text(payload.user + ': ' + payload.message));
+            })
+
+            // Broadcast message to the sockets
+            socket.on('typing', (payload) => {
+                $('#feedback').text(payload + ' typing...');
+            })
+        });
+    </script>
 </body>
 
 </html>
