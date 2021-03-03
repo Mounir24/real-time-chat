@@ -38,6 +38,17 @@
      font-family: 'Rajdhani', sans-serif;
  }
  
+ #messages strong {
+     color: #575ed8;
+     font-family: 'Rajdhani', sans-serif;
+     font-size: 18px;
+ }
+ 
+ #messages strong .date {
+     color: #575ed8;
+     text-decoration: underline;
+ }
+ 
  #chat-window #feedback {
      color: #aaa;
      padding: 14px 0px;
