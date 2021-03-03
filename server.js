@@ -69,6 +69,7 @@ io.on("connection", (socket) => {
         const encryptedMsgs = encrypt(payload.message)
         fs.appendFile("./file_logs.txt", `-- ${encryptedMsgs} --`, (err) => {
             if (err) throw err;
+            console.log(users);
             console.log("New Data Transmitted successfuly 100%");
         });
 
