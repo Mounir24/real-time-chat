@@ -33,7 +33,7 @@ $(document).ready(function() {
     socket.on('chat', (payload) => {
         $('#feedback').text('');
         //$('#messages').html(`<strong>${payload.username}</strong>: ${payload.msg} (${payload.date})`);
-        $('#messages').append($('<p>').text(payload.username + ': ' + payload.msg + ' (' + payload.date + ')'));
+        $('#messages').append($('<p>').text(payload.user + ': ' + payload.message + ' (' + new Date().toLocaleDateString() + ')'));
     })
 
     // When a user connected to server , he w'll displayed in DOM
