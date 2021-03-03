@@ -24,6 +24,7 @@ function encrypt(txt) {
     return encrypted.toString("hex");
 }
 
+
 // Decrypt function
 /*function decrypt(text) {
     let iv = Buffer.from(text.iv, "hex");
@@ -33,6 +34,8 @@ function encrypt(txt) {
     decrypted = Buffer.concat([decrypted, decipher.final()]);
     return decrypted.toString();
 }*/
+
+
 
 //const hsh = encrypt("I am Web developer, from U.S.A / selecon valley");
 //console.log(hsh);
@@ -48,15 +51,28 @@ app.get("/", (req, res) => {
     res.status(200);
     res.sendFile(__dirname + "/index.html");
 });
-
+const users = [];
 io.on("connection", (socket) => {
+    //console.log('user connected: ' + socket.id);
+
     socket.on("chat", (payload) => {
         //console.log("New Message: " + payload);
         // Encypt incoming data
-        fs.appendFile("./file_logs.txt", encrypt(payload.message), (err) => {
+        if (!payload.user) return null;
+        // Check if the user already exist or not
+        if (!users.includes(payload.user)) {
+            users.push(payload.user);
+            console.log('New User Joined: ' + payload.user);
+            console.log(users);
+        }
+        // Encrypted data 
+        const encryptedMsgs = encrypt(payload.message)
+        fs.appendFile("./file_logs.txt", `-- ${encryptedMsgs} --`, (err) => {
             if (err) throw err;
+            console.log(payload)
             console.log("New Data Transmitted successfuly 100%");
         });
+
         // Sent the message back to the Page
         io.sockets.emit("chat", payload);
         notifier.notify({
@@ -77,5 +93,5 @@ io.on("connection", (socket) => {
 
 // Server listen
 server.listen(PORT, () => {
-    console.log("Server runing on port: " + PORT);
+    console.log("Server runing on port: http://localhost:" + PORT);
 });

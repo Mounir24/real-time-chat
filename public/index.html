@@ -20,6 +20,7 @@
         </form>
     </div>-->
     <div id="mario-chat">
+        <span id="users-pannel"></span>
         <h2>MBN public Chat App</h2>
         <div id="chat-window">
             <div id="messages"></div>
@@ -64,6 +65,8 @@
                 $('#feedback').text('');
                 $('#messages').append($('<p>').text(payload.user + ': ' + payload.message));
             })
+
+            // When a user connected to server , he w'll displayed in DOM
 
             // Broadcast message to the sockets
             socket.on('typing', (payload) => {

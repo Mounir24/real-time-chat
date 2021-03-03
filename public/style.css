@@ -17,6 +17,13 @@
      border-radius: 2px;
  }
  
+ #mario-chat>#users-pannel {
+     max-width: 100%;
+     width: 100%;
+     height: auto;
+     background: #F9F9F9;
+ }
+ 
  #chat-window {
      height: 400px;
      overflow: auto;
